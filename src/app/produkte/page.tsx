@@ -15,7 +15,7 @@ export default async function ProduktePage({ searchParams }: PageProps) {
     .select('id, name, slug')
     .order('name')
 
-  // 2. Requête produits avec filtre par catégorie
+  // 2. Requête produits avec filtre par catégorie active
   let query = supabase
     .from('products')
     .select('*')
@@ -34,6 +34,23 @@ export default async function ProduktePage({ searchParams }: PageProps) {
   }
 
   const { data: products } = await query
+
+  // 3. Récupérer le nombre total de produits pour le bouton "Alle"
+  const { count: totalCount } = await supabase
+    .from('products')
+    .select('*', { count: 'exact', head: true })
+
+  // 4. Récupérer les compteurs par catégorie pour les badges des onglets
+  const { data: countsData } = await supabase
+    .from('products')
+    .select('category_id')
+
+  const categoryCounts = (countsData || []).reduce((acc: Record<string, number>, item) => {
+    if (item.category_id) {
+      acc[item.category_id] = (acc[item.category_id] || 0) + 1
+    }
+    return acc
+  }, {})
 
   return (
     <div className="min-h-screen bg-slate-50/50 pb-20">
@@ -55,7 +72,7 @@ export default async function ProduktePage({ searchParams }: PageProps) {
             Originale Markenware direkt ab Lager in Deutschland. Schneller Versand per DHL.
           </p>
 
-          {/* Filtres par Catégories */}
+          {/* Filtres par Catégories avec compteurs exacts */}
           <div className="mt-6 flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
             <Link
               href="/produkte"
@@ -65,11 +82,12 @@ export default async function ProduktePage({ searchParams }: PageProps) {
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
-              Alle ({products?.length || 0})
+              Alle ({totalCount || 0})
             </Link>
 
             {categories?.map((cat) => {
               const isActive = selectedCategory === cat.slug
+              const count = categoryCounts[cat.id] || 0
               return (
                 <Link
                   key={cat.id}
@@ -80,7 +98,7 @@ export default async function ProduktePage({ searchParams }: PageProps) {
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
-                  {cat.name}
+                  {cat.name} ({count})
                 </Link>
               )
             })}

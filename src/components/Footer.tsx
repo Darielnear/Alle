@@ -89,8 +89,13 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-900 py-6 text-center text-slate-600 text-[11px]">
-        © 2026 SPORTTECH.DE. Alle Rechte vorbehalten. Alle Preise inkl. MwSt. zzgl. Versandkosten.
+      <div className="border-t border-slate-900 py-6 text-center text-slate-600 text-[11px] space-y-4">
+        <div className="flex justify-center gap-6 opacity-70">
+            <span className="flex items-center gap-1"><ShieldCheck className="w-4 h-4 text-blue-500"/> Sicherer Einkauf</span>
+            <span className="flex items-center gap-1"><CreditCard className="w-4 h-4 text-blue-500"/> SEPA Vorkasse</span>
+            <span className="flex items-center gap-1"><Truck className="w-4 h-4 text-blue-500"/> DHL Versand</span>
+        </div>
+        <p>© 2026 SPORTTECH.DE. Alle Rechte vorbehalten. Alle Preise inkl. MwSt. zzgl. Versandkosten.</p>
       </div>
     </footer>
   )

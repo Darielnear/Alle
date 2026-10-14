@@ -95,41 +95,34 @@ export default function CheckoutPage() {
           </div>
         )}
 
-        <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-            <h2 className="font-black text-lg">Bankverbindung für Vorkasse</h2>
-            <span className="text-emerald-400 text-xs font-bold flex items-center gap-1">
+        <div className="bg-neutral-900 text-white rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
+          <div className="flex items-center justify-between border-b border-neutral-700 pb-4">
+            <h2 className="font-black text-lg">Zahlungsdetails (Vorkasse)</h2>
+            <span className="text-blue-400 text-xs font-bold flex items-center gap-1">
               <ShieldCheck className="w-4 h-4" /> SEPA Überweisung
             </span>
           </div>
 
-          <div className="space-y-4 text-sm font-medium">
-            <div className="flex justify-between items-center py-1 border-b border-slate-800">
-              <span className="text-slate-400">Gesamtbetrag:</span>
-              <span className="text-2xl font-black text-emerald-400">{formatEur(confirmed.total)}</span>
+          <div className="space-y-4 text-sm">
+            <div className="flex justify-between items-center py-2 border-b border-neutral-800">
+              <span className="text-neutral-400">Gesamtbetrag:</span>
+              <span className="text-xl font-black text-white">{formatEur(confirmed.total)}</span>
             </div>
-            <div className="flex justify-between items-center py-1 border-b border-slate-800">
-              <span className="text-slate-400">Kontoinhaber:</span>
-              <span className="font-bold">{BANK.holder}</span>
-            </div>
-            <div className="flex justify-between items-center py-1 border-b border-slate-800">
-              <span className="text-slate-400">IBAN:</span>
-              <div className="flex items-center gap-2">
-                <span className="font-mono font-bold">{BANK.iban}</span>
-                <button onClick={copyIban} className="bg-slate-800 hover:bg-slate-700 p-1.5 rounded-lg text-slate-300">
-                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-            <div className="flex justify-between items-center py-1 border-b border-slate-800">
-              <span className="text-slate-400">BIC:</span>
-              <span className="font-mono font-bold">{BANK.bic}</span>
-            </div>
-            <div className="flex justify-between items-center py-1">
-              <span className="text-slate-400">Verwendungszweck:</span>
-              <span className="font-mono font-bold text-blue-400">{confirmed.orderNumber}</span>
+            <div className="space-y-2 pt-2">
+              <p className="text-neutral-400">Kontoinhaber: <span className="font-bold text-white">{BANK.holder}</span></p>
+              <p className="text-neutral-400">IBAN: <span className="font-mono font-bold text-white">{BANK.iban}</span></p>
+              <p className="text-neutral-400">BIC: <span className="font-mono font-bold text-white">{BANK.bic}</span></p>
+              <p className="text-neutral-400">Verwendungszweck: <span className="font-mono font-bold text-blue-400">{confirmed.orderNumber}</span></p>
             </div>
           </div>
+          
+          <button 
+            onClick={copyIban}
+            className="w-full bg-neutral-800 hover:bg-neutral-700 py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2"
+          >
+            {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+            {copied ? 'IBAN kopiert!' : 'IBAN in Zwischenablage kopieren'}
+          </button>
         </div>
 
         <p className="text-center text-sm text-slate-500">

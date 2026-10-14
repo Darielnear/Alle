@@ -3,24 +3,24 @@ export const FREE_SHIPPING_FROM_EUR = 100
 export const VAT_RATE = 0.19
 
 export const BANK = {
-  holder: '[Kontoinhaber – folgt]',
-  bankName: '[Bank – folgt]',
-  iban: 'DE00 0000 0000 0000 0000 00',
-  bic: 'XXXXXXXXXXX',
+  holder: '[Name des Kontoinhabers]',
+  bankName: '[Name Ihrer Bank]',
+  iban: '[Ihre IBAN einfügen]',
+  bic: '[Ihr BIC einfügen]',
   isPlaceholder: true,
 }
 
 export const COMPANY = {
   brand: 'SPORTTECH.DE',
-  legalName: '[Firmenname – folgt]',
-  street: '[Straße und Hausnummer – folgt]',
-  zipCity: '[PLZ Ort – folgt]',
+  legalName: '[Ihr Firmenname]',
+  street: '[Straße und Hausnummer]',
+  zipCity: '[PLZ und Ort]',
   country: 'Deutschland',
   email: 'kontakt@sporttech.de',
-  phone: '[Telefon – folgt]',
-  vatId: '[USt-IdNr. – folgt]',
-  register: '[Handelsregister – folgt]',
-  managingDirector: '[Geschäftsführer – folgt]',
+  phone: '[Ihre Telefonnummer]',
+  vatId: '[USt-IdNr. des Unternehmens]',
+  register: '[Handelsregister-Eintrag]',
+  managingDirector: '[Name des Geschäftsführers]',
 }
 
 export const NAV_CATEGORIES = [

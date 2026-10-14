@@ -95,12 +95,29 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* DESCRIPTION */}
-          {product.description && (
-            <p className="text-neutral-600 text-sm leading-relaxed">
-              {product.description}
-            </p>
-          )}
+          {/* DESCRIPTION & SPECIFICATIONS */}
+          <div className="space-y-6 pt-4 border-t border-neutral-100">
+            {product.description && (
+              <div>
+                <h3 className="font-bold text-neutral-900 mb-2">Beschreibung</h3>
+                <p className="text-neutral-600 text-sm leading-relaxed">{product.description}</p>
+              </div>
+            )}
+            
+            {product.specifications && (
+              <div>
+                <h3 className="font-bold text-neutral-900 mb-2">Technische Daten</h3>
+                <dl className="grid grid-cols-2 gap-2 text-sm">
+                  {Object.entries(product.specifications).map(([key, value]) => (
+                    <div key={key} className="bg-neutral-50 p-3 rounded-lg">
+                      <dt className="text-neutral-500 text-[10px] uppercase font-bold">{key.replace('_', ' ')}</dt>
+                      <dd className="font-medium text-neutral-900">{typeof value === 'string' ? value : JSON.stringify(value)}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+          </div>
 
           {/* BOUTON D'ACHAT */}
           <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-neutral-200 z-40">

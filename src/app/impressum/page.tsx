@@ -4,9 +4,7 @@ import { COMPANY } from '@/lib/shop'
 export default function ImpressumPage() {
   return (
     <LegalLayout title="Impressum">
-      <p className="text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-100 rounded-xl px-3 py-2">
-        Angaben zum Unternehmen folgen. Bitte vor dem Live-Gang mit den echten Daten ersetzen.
-      </p>
+      {/* Impressum gemäß § 5 TMG */}
       <p>
         <strong>{COMPANY.legalName}</strong>
         <br />
@@ -27,6 +25,9 @@ export default function ImpressumPage() {
         {COMPANY.register}
         <br />
         USt-IdNr.: {COMPANY.vatId}
+      </p>
+      <p className="mt-8 text-xs text-neutral-500">
+        Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV: {COMPANY.managingDirector}.
       </p>
     </LegalLayout>
   )
