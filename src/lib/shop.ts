@@ -3,11 +3,11 @@ export const FREE_SHIPPING_FROM_EUR = 100
 export const VAT_RATE = 0.19
 
 export const BANK = {
-  holder: '[Name des Kontoinhabers]',
-  bankName: '[Name Ihrer Bank]',
-  iban: '[Ihre IBAN einfügen]',
-  bic: '[Ihr BIC einfügen]',
-  isPlaceholder: true,
+  holder: 'SPORTTECH.DE',
+  bankName: 'TRDB Bank',
+  iban: 'DE56 1001 2345 6853 0133 11',
+  bic: 'TRBKDEBBXXX',
+  isPlaceholder: false,
 }
 
 export const COMPANY = {
