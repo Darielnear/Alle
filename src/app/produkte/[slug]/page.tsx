@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
 import AddToCartButton from '@/components/AddToCartButton'
 import { ArrowLeft, CheckCircle2, ShieldCheck, Truck, RefreshCw } from 'lucide-react'
@@ -10,23 +11,23 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-import type { Metadata } from 'next'
-
-// ... (existing imports)
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const { data: product } = await supabase.from('products').select('title, subtitle').eq('slug', slug).single()
+  const { data: product } = await supabase
+    .from('products')
+    .select('title, subtitle')
+    .eq('slug', slug)
+    .single()
+
   return {
     title: product ? `${product.title} | SPORTTECH.DE` : 'Produkt nicht gefunden',
-    description: product?.subtitle || 'Entdecken Sie dieses hochwertige Produkt.'
+    description: product?.subtitle || 'Entdecken Sie dieses hochwertige Produkt.',
   }
 }
 
 export default async function ProductDetailPage({ params }: PageProps) {
   const { slug } = await params
 
-  // Récupération du produit via son slug dans Supabase
   const { data: product } = await supabase
     .from('products')
     .select('*')
@@ -37,9 +38,16 @@ export default async function ProductDetailPage({ params }: PageProps) {
     notFound()
   }
 
+  const specs = product.specifications as Record<string, unknown> | null
+  const highlights = Array.isArray(specs?.highlights)
+    ? (specs.highlights as string[])
+    : []
+  const otherSpecs = specs
+    ? Object.entries(specs).filter(([key]) => key !== 'highlights')
+    : []
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
-      
       {/* Bouton Retour */}
       <Link
         href="/produkte"
@@ -49,7 +57,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        
         {/* IMAGE DU PRODUIT */}
         <div className="lg:col-span-6 bg-white border border-neutral-200 rounded-3xl p-6 sm:p-8 flex items-center justify-center overflow-hidden">
           <div className="relative aspect-square w-full max-w-[450px] overflow-hidden rounded-2xl group cursor-crosshair">
@@ -69,7 +76,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
         {/* DETAILS DU PRODUIT */}
         <div className="lg:col-span-6 space-y-6">
-          
           <div>
             <div className="inline-flex items-center gap-1.5 bg-neutral-100 border border-neutral-200 px-3 py-1 rounded-full text-[11px] font-bold text-neutral-700 uppercase tracking-wider mb-3">
               <ShieldCheck className="w-3.5 h-3.5 text-neutral-600" />
@@ -81,7 +87,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </h1>
           </div>
 
-          {/* PRIX & DISPONIBILITÉ */}
+          {/* PRIX */}
           <div className="p-4 bg-neutral-50 border border-neutral-200 rounded-2xl space-y-2">
             <div className="flex items-baseline gap-3">
               <span className="text-3xl font-black text-neutral-900 font-mono">
@@ -100,18 +106,45 @@ export default async function ProductDetailPage({ params }: PageProps) {
             {product.description && (
               <div>
                 <h3 className="font-bold text-neutral-900 mb-2">Beschreibung</h3>
-                <p className="text-neutral-600 text-sm leading-relaxed">{product.description}</p>
+                <p className="text-neutral-600 text-sm leading-relaxed">
+                  {product.description}
+                </p>
               </div>
             )}
-            
-            {product.specifications && (
+
+            {highlights.length > 0 && (
+              <div>
+                <h3 className="font-bold text-neutral-900 mb-2">Highlights</h3>
+                <ul className="grid sm:grid-cols-2 gap-2 text-sm">
+                  {highlights.map((h) => (
+                    <li
+                      key={h}
+                      className="flex items-start gap-2 bg-neutral-50 p-3 rounded-lg text-neutral-800"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {otherSpecs.length > 0 && (
               <div>
                 <h3 className="font-bold text-neutral-900 mb-2">Technische Daten</h3>
                 <dl className="grid grid-cols-2 gap-2 text-sm">
-                  {Object.entries(product.specifications).map(([key, value]) => (
+                  {otherSpecs.map(([key, value]) => (
                     <div key={key} className="bg-neutral-50 p-3 rounded-lg">
-                      <dt className="text-neutral-500 text-[10px] uppercase font-bold">{key.replace('_', ' ')}</dt>
-                      <dd className="font-medium text-neutral-900">{typeof value === 'string' ? value : JSON.stringify(value)}</dd>
+                      <dt className="text-neutral-500 text-[10px] uppercase font-bold">
+                        {key.replace(/_/g, ' ')}
+                      </dt>
+                      <dd className="font-medium text-neutral-900">
+                        {typeof value === 'string' || typeof value === 'number'
+                          ? String(value)
+                          : Array.isArray(value)
+                            ? value.join(', ')
+                            : JSON.stringify(value)}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -145,7 +178,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             />
           </div>
 
-          {/* ARGUMENTS DE REASSURANCE */}
+          {/* REASSURANCE */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-slate-100 text-xs text-slate-600">
             <div className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
               <Truck className="w-4 h-4 text-blue-600 shrink-0" />
@@ -164,11 +197,8 @@ export default async function ProductDetailPage({ params }: PageProps) {
               <span>Herstellergarantie</span>
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
   )
 }
