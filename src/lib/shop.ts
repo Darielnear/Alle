@@ -2,6 +2,10 @@ export const SHIPPING_COST_EUR = 4.9
 export const FREE_SHIPPING_FROM_EUR = 100
 export const VAT_RATE = 0.19
 
+/** URL publique du site (sans slash final) — à mettre à jour après domaine */
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://sportall-two.vercel.app'
+
 export const BANK = {
   holder: 'SPORTTECH.DE',
   bankName: 'TRDB Bank',
@@ -10,17 +14,22 @@ export const BANK = {
   isPlaceholder: false,
 }
 
+/**
+ * Infos légales — REMPLIR avec les vraies données du client
+ * Tant que isPlaceholder === true, un bandeau peut s’afficher sur l’Impressum.
+ */
 export const COMPANY = {
   brand: 'SPORTTECH.DE',
-  legalName: '[Ihr Firmenname]',
+  legalName: '[Ihr Firmenname / Vor- und Nachname]',
   street: '[Straße und Hausnummer]',
-  zipCity: '[PLZ und Ort]',
+  zipCity: '[PLZ Ort]',
   country: 'Deutschland',
-  email: 'kontakt@sporttech.de',
-  phone: '[Ihre Telefonnummer]',
-  vatId: '[USt-IdNr. des Unternehmens]',
-  register: '[Handelsregister-Eintrag]',
-  managingDirector: '[Name des Geschäftsführers]',
+  email: 'kontakt@sporttech.de', // demain: mail pro LWS
+  phone: '[Telefonnummer]',
+  vatId: '[USt-IdNr. z.B. DE123456789]',
+  register: '[Handelsregister / Amtsgericht – oder leer bei Einzelunternehmen]',
+  managingDirector: '[Vertretungsberechtigte Person]',
+  isPlaceholder: true,
 }
 
 export const NAV_CATEGORIES = [
