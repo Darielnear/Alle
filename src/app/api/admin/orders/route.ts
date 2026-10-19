@@ -58,4 +58,23 @@ export async function PATCH(request: Request) {
     updates.paid_at = new Date().toISOString()
   }
 
-  if 
+  if (Object.keys(updates).length === 0) {
+    return NextResponse.json({ error: 'nothing to update' }, { status: 400 })
+  }
+
+  updates.updated_at = new Date().toISOString()
+
+  const supabase = getServerSupabase()
+  const { data, error } = await supabase
+    .from('orders')
+    .update(updates)
+    .eq('id', id)
+    .select()
+    .single()
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+
+  return NextResponse.json({ order: data })
+}
