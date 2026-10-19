@@ -1,14 +1,21 @@
-// src/app/layout.tsx
 import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { Toaster } from 'sonner' // Ajout de l'import sonner
+import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
-  title: 'SPORTTECH.DE | Bosch E-Bike Akkus, Garmin & Coros Sportuhren',
-  description: 'Originale Bosch PowerPack 540 Akkus sowie GPS-Sportuhren von Garmin und Coros. Schneller Versand in Deutschland & sichere Zahlung per Banküberweisung.',
-  keywords: ['Bosch PowerPack 540', 'Garmin Venu 3', 'Coros Pace Pro', 'E-Bike Akku Deutschland', 'GPS Sportuhr'],
+  title: 'SPORTTECH.DE | Fitness, Running & Recovery – Markenprodukte',
+  description:
+    'Fitness-, Running- und Recovery-Produkte: Massagepistolen, GPS-Uhren, Laufbekleidung und Trainingsequipment. Originale Markenware, schneller Versand in Deutschland, Zahlung per Vorkasse.',
+  keywords: [
+    'Fitness Shop Deutschland',
+    'Running Ausrüstung',
+    'Recovery Massagepistole',
+    'GPS Sportuhr',
+    'Laufbekleidung',
+    'SPORTTECH.DE',
+  ],
 }
 
 export default function RootLayout({
@@ -22,7 +29,6 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        {/* Ajout du Toaster ici. Les notifications apparaîtront en bas à droite. */}
         <Toaster position="bottom-right" richColors closeButton />
       </body>
     </html>
