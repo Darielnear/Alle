@@ -6,8 +6,8 @@ export default function ImpressumPage() {
     <LegalLayout title="Impressum">
       {COMPANY.isPlaceholder && (
         <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-          <strong>Hinweis:</strong> Die folgenden Angaben sind Platzhalter und
-          werden vor dem Live-Gang durch die echten Unternehmensdaten ersetzt.
+          <strong>Hinweis:</strong> Firmenname / USt-IdNr. ggf. noch zu
+          vervollständigen. Anschrift und Telefonnummern sind hinterlegt.
         </div>
       )}
 
@@ -28,6 +28,10 @@ export default function ImpressumPage() {
         E-Mail: {COMPANY.email}
         <br />
         Telefon: {COMPANY.phone}
+        <br />
+        Telefon: {COMPANY.phoneAlt}
+        <br />
+        Telefon: {COMPANY.phoneExtra}
       </p>
 
       <h2 className="text-lg font-bold text-slate-900 mt-6">Vertretung</h2>
@@ -38,13 +42,13 @@ export default function ImpressumPage() {
       </p>
 
       <h2 className="text-lg font-bold text-slate-900 mt-6">Umsatzsteuer</h2>
-      <p>Umsatzsteuer-Identifikationsnummer: {COMPANY.vatId}</p>
+      <p>USt-IdNr.: {COMPANY.vatId}</p>
 
       <h2 className="text-lg font-bold text-slate-900 mt-6">
         Verantwortlich für den Inhalt
       </h2>
       <p className="text-sm text-slate-600">
-        Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: {COMPANY.managingDirector},{' '}
+        Verantwortlich nach § 18 Abs. 2 MStV: {COMPANY.managingDirector},{' '}
         {COMPANY.street}, {COMPANY.zipCity}.
       </p>
 
@@ -52,8 +56,7 @@ export default function ImpressumPage() {
         Streitbeilegung
       </h2>
       <p className="text-sm text-slate-600">
-        Die Europäische Kommission stellt eine Plattform zur
-        Online-Streitbeilegung (OS) bereit:{' '}
+        Plattform der EU zur Online-Streitbeilegung:{' '}
         <a
           href="https://ec.europa.eu/consumers/odr/"
           className="text-blue-600 font-semibold"

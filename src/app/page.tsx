@@ -16,7 +16,6 @@ import {
   CheckCircle2,
 } from 'lucide-react'
 import ProductCard from '@/components/ProductCard'
-import { FREE_SHIPPING_FROM_EUR } from '@/lib/shop'
 
 export const revalidate = 0
 
@@ -75,7 +74,7 @@ export default async function Home() {
             <div className="lg:col-span-7 space-y-5 sm:space-y-6">
               <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full text-xs font-semibold text-blue-800 anim-fade-up">
                 <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-                <span>Deutscher Onlineshop · Versand ab Lager DE</span>
+                <span>Onlineshop · Versand aus Deutschland</span>
               </div>
 
               <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.12] anim-fade-up anim-delay-1">
@@ -87,8 +86,7 @@ export default async function Home() {
 
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl anim-fade-up anim-delay-2">
                 Massagepistolen, GPS-Uhren, Laufbekleidung und Trainingsequipment –
-                originale Markenware mit schnellem DHL-Versand und Zahlung per
-                Vorkasse.
+                originale Markenware, kostenloser Versand und Zahlung per Vorkasse.
               </p>
 
               <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs sm:text-sm text-slate-700 font-medium anim-fade-up anim-delay-3">
@@ -98,7 +96,7 @@ export default async function Home() {
                 </li>
                 <li className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  Versand in 1–3 Werktagen
+                  Kostenloser Versand
                 </li>
                 <li className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
@@ -142,8 +140,7 @@ export default async function Home() {
             <div className="flex items-center gap-2.5 text-slate-700">
               <Truck className="w-4 h-4 text-blue-600 shrink-0" />
               <span>
-                Kostenlos ab{' '}
-                <strong>{FREE_SHIPPING_FROM_EUR.toFixed(0)} €</strong>
+                <strong>Kostenloser Versand</strong>
               </span>
             </div>
             <div className="flex items-center gap-2.5 text-slate-700">
@@ -161,7 +158,7 @@ export default async function Home() {
             <div className="flex items-center gap-2.5 text-slate-700">
               <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
               <span>
-                Versand in <strong>1–3 Werktagen</strong>
+                DE · AT · CH · LI · LU
               </span>
             </div>
           </div>
@@ -243,7 +240,7 @@ export default async function Home() {
             Warum SPORTTECH.DE?
           </h2>
           <p className="text-sm text-slate-500 mt-2">
-            Klar, transparent und auf den deutschen Markt ausgerichtet.
+            Klar, transparent – für Kunden in DE, AT, CH, LI und LU.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -256,8 +253,8 @@ export default async function Home() {
             },
             {
               icon: Truck,
-              title: 'Schneller Versand',
-              text: 'Versand aus Deutschland per DHL. In der Regel bei dir in 1–3 Werktagen.',
+              title: 'Kostenloser Versand',
+              text: 'Kostenloser Versand per DHL nach Deutschland, Österreich, Schweiz, Liechtenstein und Luxemburg. In DE meist in 1–3 Werktagen.',
               delay: 'anim-delay-2',
             },
             {

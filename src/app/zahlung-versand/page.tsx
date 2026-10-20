@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Building2, Truck, ShieldCheck, Clock } from 'lucide-react'
-import { BANK, FREE_SHIPPING_FROM_EUR, SHIPPING_COST_EUR, formatEur } from '@/lib/shop'
+import { BANK } from '@/lib/shop'
 
 export default function ZahlungVersandPage() {
   return (
@@ -18,7 +18,8 @@ export default function ZahlungVersandPage() {
             Zahlung & Versand
           </h1>
           <p className="mt-2 text-sm text-slate-500 max-w-2xl">
-            Transparente Informationen über unsere Zahlungsmethoden und den schnellen Versand innerhalb Deutschlands.
+            Transparente Informationen zu Vorkasse und Versand nach Deutschland,
+            Österreich, Schweiz, Liechtenstein und Luxemburg.
           </p>
         </div>
 
@@ -29,30 +30,35 @@ export default function ZahlungVersandPage() {
                 <Building2 className="h-5 w-5" />
               </div>
               <div>
-                <h2 className="font-bold text-slate-900">Vorkasse per SEPA-Überweisung</h2>
+                <h2 className="font-bold text-slate-900">
+                  Vorkasse per SEPA-Überweisung
+                </h2>
                 <p className="text-xs text-slate-500">Sicher & Direkt</p>
               </div>
             </div>
 
             <p className="text-sm text-slate-600 leading-relaxed">
-              Sie überweisen den Rechnungsbetrag bequem auf unser deutsches Bankkonto. Nach Absendung Ihrer Bestellung
-              erhalten Sie unsere Bankverbindung sowie einen eindeutigen Verwendungszweck (Bestellnummer).
+              Sie überweisen den Rechnungsbetrag auf unser Bankkonto. Nach der
+              Bestellung erhalten Sie IBAN, BIC und den Verwendungszweck
+              (Bestellnummer).
             </p>
 
-            {BANK.isPlaceholder && (
-              <p className="mt-3 text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-100 rounded-xl px-3 py-2">
-                IBAN folgt. Die Überweisungsdaten werden vor dem Live-Gang hinterlegt.
-              </p>
+            {!BANK.isPlaceholder && (
+              <ul className="mt-4 space-y-1 text-xs text-slate-600 border-t border-slate-100 pt-4 font-mono">
+                <li>Kontoinhaber: {BANK.holder}</li>
+                <li>IBAN: {BANK.iban}</li>
+                <li>BIC: {BANK.bic}</li>
+              </ul>
             )}
 
             <ul className="mt-4 space-y-2 text-xs text-slate-500 border-t border-slate-100 pt-4">
               <li className="flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-emerald-500" />
-                Maximale Sicherheit ohne Eingabe sensibler Kreditkartendaten
+                Keine Kreditkartendaten erforderlich
               </li>
               <li className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-slate-400" />
-                Bearbeitung sofort nach Zahlungseingang (1-2 Werktage)
+                Versand nach Zahlungseingang
               </li>
             </ul>
           </div>
@@ -63,28 +69,28 @@ export default function ZahlungVersandPage() {
                 <Truck className="h-5 w-5" />
               </div>
               <div>
-                <h2 className="font-bold text-slate-900">Versand mit DHL</h2>
-                <p className="text-xs text-slate-500">Schnell & Verfolgbar</p>
+                <h2 className="font-bold text-slate-900">Versand</h2>
+                <p className="text-xs text-slate-500">DHL · Sendungsverfolgung</p>
               </div>
             </div>
 
             <p className="text-sm text-slate-600 leading-relaxed">
-              Der Versand erfolgt versichert direkt aus unserem Lager in Deutschland per DHL. Sie erhalten eine
-              Sendungsverfolgungsnummer per E-Mail, sobald Ihr Paket übergeben wurde.
+              Versand aus Deutschland. Lieferländer: Deutschland, Österreich,
+              Schweiz, Liechtenstein, Luxemburg.
             </p>
 
             <div className="mt-4 space-y-2 text-xs border-t border-slate-100 pt-4">
               <div className="flex justify-between py-1 border-b border-slate-50">
-                <span className="text-slate-500">Lieferzeit innerhalb Deutschlands:</span>
-                <span className="font-semibold text-slate-900">1 - 3 Werktage</span>
+                <span className="text-slate-500">Lieferzeit (DE):</span>
+                <span className="font-semibold text-slate-900">1–3 Werktage</span>
               </div>
               <div className="flex justify-between py-1 border-b border-slate-50">
-                <span className="text-slate-500">Standard Versandkosten:</span>
-                <span className="font-semibold text-slate-900">{formatEur(SHIPPING_COST_EUR)}</span>
+                <span className="text-slate-500">Lieferzeit (AT, CH, LI, LU):</span>
+                <span className="font-semibold text-slate-900">3–7 Werktage</span>
               </div>
               <div className="flex justify-between py-1">
-                <span className="text-slate-500">Kostenloser Versand:</span>
-                <span className="font-semibold text-emerald-600">ab {formatEur(FREE_SHIPPING_FROM_EUR)}</span>
+                <span className="text-slate-500">Versandkosten:</span>
+                <span className="font-semibold text-emerald-600">Kostenlos</span>
               </div>
             </div>
           </div>

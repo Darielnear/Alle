@@ -1,8 +1,7 @@
-export const SHIPPING_COST_EUR = 4.9
-export const FREE_SHIPPING_FROM_EUR = 100
+export const SHIPPING_COST_EUR = 0
+export const FREE_SHIPPING_FROM_EUR = 0
 export const VAT_RATE = 0.19
 
-/** URL publique du site (sans slash final) — à mettre à jour après domaine */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://sportall-two.vercel.app'
 
@@ -14,23 +13,32 @@ export const BANK = {
   isPlaceholder: false,
 }
 
-/**
- * Infos légales — REMPLIR avec les vraies données du client
- * Tant que isPlaceholder === true, un bandeau peut s’afficher sur l’Impressum.
- */
 export const COMPANY = {
   brand: 'SPORTTECH.DE',
-  legalName: '[Ihr Firmenname / Vor- und Nachname]',
-  street: '[Straße und Hausnummer]',
-  zipCity: '[PLZ Ort]',
+  // ⚠️ À remplacer par le vrai nom / raison sociale du client
+  legalName: '[Oksana Mankowska ]',
+  street: 'Borsigallee 26',
+  zipCity: '60388 Frankfurt am Main',
   country: 'Deutschland',
-  email: 'kontakt@sporttech.de', // demain: mail pro LWS
-  phone: '[Telefonnummer]',
-  vatId: '[USt-IdNr. z.B. DE123456789]',
-  register: '[Handelsregister / Amtsgericht – oder leer bei Einzelunternehmen]',
+  email: 'kontakt@sporttech.de',
+  phone: '+49 1590 6116121',
+  phoneAlt: '+351 924 965 635',
+  phoneAlt: '+49 6109 5017210 ',
+  phoneExtra: '[Dritte Telefonnummer]',
+  vatId: '[USt-IdNr.]',
+  register: '[Handelsregister – oder leer]',
   managingDirector: '[Vertretungsberechtigte Person]',
+  // false dès que legalName + vatId + gérant sont remplis
   isPlaceholder: true,
 }
+
+export const SHIP_COUNTRIES = [
+  { code: 'DE', label: 'Deutschland' },
+  { code: 'AT', label: 'Österreich' },
+  { code: 'CH', label: 'Schweiz' },
+  { code: 'LI', label: 'Liechtenstein' },
+  { code: 'LU', label: 'Luxemburg' },
+] as const
 
 export const NAV_CATEGORIES = [
   { name: 'Fitness', slug: 'fitness' },
@@ -41,8 +49,8 @@ export const NAV_CATEGORIES = [
   { name: 'Zubehör', slug: 'zubehoer' },
 ] as const
 
-export function getShippingCost(subtotal: number) {
-  return subtotal >= FREE_SHIPPING_FROM_EUR ? 0 : SHIPPING_COST_EUR
+export function getShippingCost(_subtotal: number) {
+  return SHIPPING_COST_EUR
 }
 
 export function getVatIncluded(gross: number) {
