@@ -15,20 +15,17 @@ export const BANK = {
 
 export const COMPANY = {
   brand: 'SPORTTECH.DE',
-  // ⚠️ À remplacer par le vrai nom / raison sociale du client
-  legalName: '[Oksana Mankowska ]',
+  legalName: 'Oksana Mankowska',
   street: 'Borsigallee 26',
   zipCity: '60388 Frankfurt am Main',
   country: 'Deutschland',
   email: 'kontakt@sporttech.de',
   phone: '+49 1590 6116121',
   phoneAlt: '+351 924 965 635',
-  phoneAlt: '+49 6109 5017210 ',
-  phoneExtra: '[Dritte Telefonnummer]',
+  phoneExtra: '+49 6109 5017210',
   vatId: '[USt-IdNr.]',
-  register: '[Handelsregister – oder leer]',
-  managingDirector: '[Vertretungsberechtigte Person]',
-  // false dès que legalName + vatId + gérant sont remplis
+  register: '',
+  managingDirector: 'Oksana Mankowska',
   isPlaceholder: true,
 }
 
